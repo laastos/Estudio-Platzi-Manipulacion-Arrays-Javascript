@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div id="products">
+      <h2>Lista de productos</h2>
+    </div>
+    <div id="tasks">
+      <h2>Lista de tareas</h2>
+    </div>
+    <script>
+      // Products list
+      const products = [
+        { title: 'Burger', price: 10},
+        { title: 'Pizza', price: 20}
+      ];
+      const appProducts = document.getElementById('products');
+      products.forEach(product => {
+        appProducts.innerHTML += `<li>${product.title} - ${product.price}</li>`;
+      });
+
+      // Task list
+      const tasks = [
+        { id: 1, title: 'Levantarse', status: 'pending', time: '6:00', duration: '5', finished: true},
+        { id: 2, title: 'Ejercicio', status: 'pending', time: '6:15', duration: '30', finished: false},
+        { id: 3, title: 'Lectura', status: 'pending', time: '7:00', duration: '60', finished: false},
+        { id: 4, title: 'Trabajo', status: 'pending', time: '8:00', duration: '480', finished: true},
+      ];
+      const capitalize = s => s && s[0].toUpperCase() + s.slice(1);
+      const appTasks = document.getElementById('tasks');
+      const taskStatus = ['pendig', 'started', 'completed'];
+      let taskStatusSelect = "";
+      taskStatus.forEach(
+        task => 
+          taskStatusSelect += `<option value="${task}">${capitalize(task)}</option>`
+      );
+      tasks.forEach(task => {
+        appTasks.innerHTML += `<input
+          type="checkbox"
+          id="task${task.id}"
+          name="task${task.id}"
+          ${task.finished ? "checked" : ""} />`;
+        appTasks.innerHTML += `<label for="task${task.id}">${task.title} - ${task.duration} minutos</label>
+        <select id="task${task.id}">${taskStatusSelect}</select>
+        <br />`;
+      });
+    </script>
+  </div>
+</body>
+</html>
